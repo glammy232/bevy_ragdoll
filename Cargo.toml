@@ -1,0 +1,38 @@
+[package]
+name = "bevy_ragdoll"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bevy = { version = "0.19.0", default-features = false, features = [
+	"bevy_asset",
+	"bevy_scene",
+	"bevy_winit",
+	"bevy_render",
+	"bevy_core_pipeline",
+	"bevy_sprite",
+	"bevy_text",
+	"bevy_ui",
+	"multi-threaded",
+	"png",
+	"webgl2",
+]}
+bevy_rapier2d = "0.35.0"
+rand = "0.10.2"
+rapier2d = "0.34.0"
+
+[profile.release]
+opt-level = "z"     # Минимальный размер
+lto = true          # Link-time optimization
+codegen-units = 1   # Лучшая оптимизация
+strip = true        # Удалить отладочную информацию
+panic = "abort"     # Меньше кода для обработки паники
+
+# Специальный профиль для wasm
+[profile.wasm-release]
+inherits = "release"
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
